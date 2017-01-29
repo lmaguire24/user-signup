@@ -17,41 +17,56 @@
 import webapp2
 import cgi
 
-# html boilerplate for the top of every page
-page_header =
-"""<!DOCTYPE!>
-<html>
-<head>
-    <title>User Signup</title>
-    <style type="text/css">
-        .error {
-        color: red;
-        }
-    <style>
-</head>
-<body>
-    <h1>
-        <a href="/">Signup</a>
-    </h1>
-""""
-
-# html boilerplate for the bottom of every page
-page_footer = """
-</body>
-</html>
-"""
+# # html boilerplate for the top of every page
+# page_header =
+# """<!DOCTYPE!>
+# <html>
+# <head>
+#     <title>User Signup</title>
+#     <style type="text/css">
+#         .error {
+#         color: red;
+#         }
+#     <style>
+# </head>
+# <body>
+#     <h1>
+#         <a href="/">Signup</a>
+#     </h1>
+# """"
+#
+# # html boilerplate for the bottom of every page
+# page_footer = """
+# </body>
+# </html>
+# """
 
 
 def build_page(textarea_content):
     user_label = "<label> Username:</label>"
+    user_input = "<input type='text' name='user'/>"
 
     password_label = "<label>Password:</label>"
+    password_input = "<input type='text' name='password' />"
 
     verify_label = "<label>Verify Password</label>"
+    verify_input  = "<input type='text' name='verify' />"
 
     email_label = "<label>Email (optional)</lanel>"
+    email_verify = "<input type='text' name='email' />"
 
     submit = "<input type='submit' />"
+
+    header = "<h2>Signup</h2>"
+
+    form = ("<form method='post'>" +
+            user_label + user_input + "<br>" +
+            password_label + password_input + "<br>" +
+            verify_label + verify_input + "<br>" +
+            email_label + email_verify + "<br>" +
+            submit + "</form>")
+
+    return header + form
 
 # class Index(webapp2.RequestHandler):
 #     """ Handles requests coming in to '/' (the root of our site)
@@ -63,7 +78,8 @@ def build_page(textarea_content):
 
 class MainHandler(webapp2.RequestHandler):
     def get(self):
-        self.response.write('Hello world!')
+        content = build_page("")
+        self.response.write(content)
 
 app = webapp2.WSGIApplication([
     ('/', MainHandler)
